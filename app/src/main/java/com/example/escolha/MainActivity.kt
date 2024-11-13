@@ -7,14 +7,20 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -25,8 +31,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.draw.paint
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,94 +54,140 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             EscolhaTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    Inicio()
-                }
+                Inicio()
             }
         }
     }
 }
 
+val corEscura = Color(0xFFFF17162D)
+val roxo = Color(0xFFFF4139AD)
+
 @Composable
 fun Sorteio(navController: androidx.navigation.NavController) {
+
     var sorteio by remember { mutableStateOf(1) }
+    var sorteio_d = sorteio + 1
+    var sorteio_e = sorteio_d + 1
+
     val img_sorteada = when (sorteio) {
-        1 -> R.drawable.featuredimage
-        2 -> R.drawable.filme4_xml
-        3 -> R.drawable.filme3_xml
-        4 -> R.drawable.download__1_
-        5 -> R.drawable.filme5
-        else -> R.drawable.images__5_
+        1 -> R.drawable.credd
+        2 -> R.drawable.deadpool___wolverine
+        3 -> R.drawable.hellboy
+        4 -> R.drawable.o_urso
+        5 -> R.drawable.alien
+        6 -> R.drawable.the_last_of_us
+        7 -> R.drawable.stranger_things
+        8 -> R.drawable.got
+        9 -> R.drawable.you
+        else -> R.drawable.sem_dor__sem_ganho
+    }
+    val img_direita = when (sorteio_d) {
+        1 -> R.drawable.credd
+        2 -> R.drawable.deadpool___wolverine
+        3 -> R.drawable.hellboy
+        4 -> R.drawable.o_urso
+        5 -> R.drawable.alien
+        6 -> R.drawable.the_last_of_us
+        7 -> R.drawable.stranger_things
+        8 -> R.drawable.got
+        9 -> R.drawable.you
+        else -> R.drawable.sem_dor__sem_ganho
+    }
+    val img_esquerda = when (sorteio_e) {
+        1 -> R.drawable.credd
+        2 -> R.drawable.deadpool___wolverine
+        3 -> R.drawable.hellboy
+        4 -> R.drawable.o_urso
+        5 -> R.drawable.alien
+        6 -> R.drawable.the_last_of_us
+        7 -> R.drawable.stranger_things
+        8 -> R.drawable.got
+        9 -> R.drawable.you
+        else -> R.drawable.sem_dor__sem_ganho
     }
     val nomeDoFilme = when (sorteio) {
-        1 -> "Terror"
-        2 -> "Comedia"
-        3 -> "Ação"
-        4 -> "Romance"
-        5 -> "Suspense"
-        else -> "Romance"
+        1 -> "Filme: Credd "
+        2 -> "Filme: Deadpool e Wolverine "
+        3 -> "Filme: Hellboy "
+        4 -> "Série: O Urso "
+        5 -> "Filme: Alien "
+        6 -> "Serie: The Last ot US "
+        7 -> "Serie: Stranger Things "
+        8 -> "Serie: Game Of Thrones "
+        9 -> "Serie: YOU "
+        else -> "Filme: Sem dor, Sem Ganho "
     }
 
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
-            .padding(top = 20.dp)
-            .background(color = Color.Black)
-    ) {
-
-        Text(
-            text = "Qual o Filme para hoje ?",
-            fontSize = 30.sp,
-            color = Color.White,
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth(),
-            textAlign = TextAlign.Center,
-            fontFamily = MaterialTheme.typography.titleLarge.fontFamily
-        )
-
-        Card(
-            modifier = Modifier
-                .padding(20.dp)
-                .height(50.dp)
-                .width(200.dp)
-        ) {
-            Text(
-                text = nomeDoFilme,
-                fontSize = 30.sp,
-                modifier = Modifier
-                    .padding(5.dp)
-                    .fillMaxWidth(),
-                textAlign = TextAlign.Center,
-                color = Color.Black,
+            .fillMaxSize()
+            .paint(
+                painter = painterResource(id = R.drawable.backgtound_escolha),
+                contentScale = ContentScale.Crop
             )
+    ) {
+        Spacer(modifier = Modifier.padding(top = 60.dp))
+
+        Row(
+            modifier = Modifier
+                .clipToBounds()
+        ) {
+            Image(
+                painter = painterResource(id = img_esquerda),
+                contentDescription = "Filme",
+                modifier = Modifier
+                    .size(50.dp)
+                    .offset(x = (30).dp)
+            )
+            Image(
+                painter = painterResource(id = img_direita),
+                contentDescription = "Filme",
+                modifier = Modifier
+                    .size(100.dp)
+                    .offset(x = (-10).dp) // Move a imagem parcialmente para fora da tela
+            )
+            Image(
+                painter = painterResource(id = img_sorteada),
+                contentDescription = "Filme",
+                modifier = Modifier
+                    .width(500.dp)
+                    .height(400.dp)
+                    .offset(x = (-80).dp)
+            )
+
         }
 
-        Image(
-            painter = painterResource(id = img_sorteada),
-            contentDescription = "Filme",
+        Spacer(modifier = Modifier.padding(top = 10.dp))
+
+
+        Text(
+            text = nomeDoFilme,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.SemiBold,
             modifier = Modifier
-                .padding(top = 16.dp)
-                .width(400.dp)
-                .height(400.dp)
-                .align(Alignment.CenterHorizontally)
+                .padding(top = 5.dp)
+                .fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = Color(0xFFFF000000)
         )
 
         Button(
-            onClick = { sorteio = (1..6).random() },
+            onClick = { sorteio = (1..10).random() },
             modifier = Modifier
                 .padding(20.dp)
-                .width(220.dp)
-                .height(50.dp),
+                .width(323.dp)
+                .height(45.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Unspecified,
+                containerColor = Color(0xFFFF4139AD),
                 contentColor = Color.White
             )
         ) {
             Text(
                 text = "Escolher",
-                fontSize = 29.sp
+                fontSize = 24.sp
             )
         }
     }
@@ -147,67 +206,83 @@ fun Inicio() {
 @Composable
 fun InicioScreen(navController: androidx.navigation.NavController) {
     Column(
-        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
-            .padding(top = 20.dp)
+            .paint(
+                painter = painterResource(id = R.drawable.tela_de_inicio),
+                contentScale = ContentScale.Crop
+            )
     ) {
         Text(
-            text = "Eu escolho por Você!",
+            text = "Eu Escolho Você",
             fontSize = 30.sp,
-            color = Color.White,
+            color = Color.Transparent,
+            fontWeight = FontWeight.Medium,
             modifier = Modifier
-                .padding(16.dp)
+                .padding(top = 144.dp)
                 .fillMaxWidth(),
             textAlign = TextAlign.Center,
             fontFamily = MaterialTheme.typography.titleLarge.fontFamily
         )
 
-        Card(
-            modifier = Modifier
-                .padding(20.dp)
-                .height(46.dp)
-                .width(250.dp)
-        ) {
-            Text(
-                text = "O que vou assistir?",
-                fontSize = 27.sp,
-                modifier = Modifier
-                    .padding(3.dp)
-                    .fillMaxWidth(),
-                textAlign = TextAlign.Center,
-                color = Color.Black,
-            )
-        }
-
-        Image(
-            painter = painterResource(id = R.drawable.duvida),
-            contentDescription = "Filme",
-            modifier = Modifier
-                .padding(top = 5.dp)
-                .width(350.dp)
-                .height(400.dp)
-                .align(Alignment.CenterHorizontally)
-        )
+        Spacer(modifier = Modifier.padding(top = 390.dp))
 
         Button(
             onClick = { navController.navigate("home") },
             modifier = Modifier
-                .padding(20.dp)
-                .width(220.dp)
-                .height(50.dp),
+                .width(323.dp)
+                .height(45.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Unspecified,
+                containerColor = corEscura,
                 contentColor = Color.White
-            )
+            ),
         ) {
             Text(
-                text = "Escolher",
-                fontSize = 29.sp
+                text = "Perguntas Aleatorias",
+                fontSize = 18.sp,
+                modifier = Modifier.padding(bottom = 2.dp)
             )
         }
+
+        Spacer(modifier = Modifier.padding(top = 8.dp))
+
+        Button(
+            onClick = { navController.navigate("home") },
+            modifier = Modifier
+                .width(323.dp)
+                .height(45.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = roxo,
+                contentColor = Color.White
+            ),
+
+            ) {
+            Text(
+                text = "O que assistir",
+                fontSize = 18.sp, fontWeight = FontWeight.Medium
+            )
+        }
+
+        Spacer(modifier = Modifier.padding(top = 8.dp))
+
+        Button(
+            onClick = { navController.navigate("home") },
+            modifier = Modifier
+                .width(323.dp)
+                .height(45.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = corEscura,
+                contentColor = Color.White
+            ),
+
+            ) {
+            Text(
+                text = "Jantar em Familia ",
+                fontSize = 18.sp, fontWeight = FontWeight.Medium
+            )
+        }
+
     }
 }
 
@@ -215,8 +290,15 @@ fun InicioScreen(navController: androidx.navigation.NavController) {
 @Composable
 fun GreetingPreview() {
     EscolhaTheme {
-        Surface(modifier = Modifier.fillMaxSize()) {
-            Inicio()
-        }
+        InicioScreen(rememberNavController())
     }
+}
+
+@Preview
+@Composable
+private fun SorteioPreview() {
+    EscolhaTheme {
+        Sorteio(rememberNavController())
+    }
+
 }
