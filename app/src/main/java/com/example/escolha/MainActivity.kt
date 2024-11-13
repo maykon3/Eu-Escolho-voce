@@ -12,9 +12,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -32,7 +30,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.focusModifier
@@ -67,34 +64,8 @@ val roxo = Color(0xFFFF4139AD)
 fun Sorteio(navController: androidx.navigation.NavController) {
 
     var sorteio by remember { mutableStateOf(1) }
-    var sorteio_d = sorteio + 1
-    var sorteio_e = sorteio_d + 1
 
     val img_sorteada = when (sorteio) {
-        1 -> R.drawable.credd
-        2 -> R.drawable.deadpool___wolverine
-        3 -> R.drawable.hellboy
-        4 -> R.drawable.o_urso
-        5 -> R.drawable.alien
-        6 -> R.drawable.the_last_of_us
-        7 -> R.drawable.stranger_things
-        8 -> R.drawable.got
-        9 -> R.drawable.you
-        else -> R.drawable.sem_dor__sem_ganho
-    }
-    val img_direita = when (sorteio_d) {
-        1 -> R.drawable.credd
-        2 -> R.drawable.deadpool___wolverine
-        3 -> R.drawable.hellboy
-        4 -> R.drawable.o_urso
-        5 -> R.drawable.alien
-        6 -> R.drawable.the_last_of_us
-        7 -> R.drawable.stranger_things
-        8 -> R.drawable.got
-        9 -> R.drawable.you
-        else -> R.drawable.sem_dor__sem_ganho
-    }
-    val img_esquerda = when (sorteio_e) {
         1 -> R.drawable.credd
         2 -> R.drawable.deadpool___wolverine
         3 -> R.drawable.hellboy
@@ -125,54 +96,33 @@ fun Sorteio(navController: androidx.navigation.NavController) {
         modifier = Modifier
             .fillMaxSize()
             .paint(
-                painter = painterResource(id = R.drawable.backgtound_escolha),
+                painter = painterResource( id = R.drawable.backgtound_escolha ),
                 contentScale = ContentScale.Crop
             )
     ) {
         Spacer(modifier = Modifier.padding(top = 60.dp))
 
-        Row(
+        Image(
+            painter = painterResource(id = img_sorteada),
+            contentDescription = "Filme",
             modifier = Modifier
-                .clipToBounds()
-        ) {
-            Image(
-                painter = painterResource(id = img_esquerda),
-                contentDescription = "Filme",
-                modifier = Modifier
-                    .size(50.dp)
-                    .offset(x = (30).dp)
-            )
-            Image(
-                painter = painterResource(id = img_direita),
-                contentDescription = "Filme",
-                modifier = Modifier
-                    .size(100.dp)
-                    .offset(x = (-10).dp) // Move a imagem parcialmente para fora da tela
-            )
-            Image(
-                painter = painterResource(id = img_sorteada),
-                contentDescription = "Filme",
-                modifier = Modifier
-                    .width(500.dp)
-                    .height(400.dp)
-                    .offset(x = (-80).dp)
-            )
-
-        }
+                .padding(top = 16.dp)
+                .width(400.dp)
+                .height(400.dp)
+                .align(Alignment.CenterHorizontally)
+        )
 
         Spacer(modifier = Modifier.padding(top = 10.dp))
 
 
-        Text(
-            text = nomeDoFilme,
+        Text(text = nomeDoFilme,
             fontSize = 24.sp,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier
                 .padding(top = 5.dp)
                 .fillMaxWidth(),
             textAlign = TextAlign.Center,
-            color = Color(0xFFFF000000)
-        )
+            color = Color(0xFFFF000000))
 
         Button(
             onClick = { sorteio = (1..10).random() },
