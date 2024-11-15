@@ -12,7 +12,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -30,6 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.focusModifier
@@ -63,7 +66,20 @@ val roxo = Color(0xFFFF4139AD)
 @Composable
 fun Sorteio(navController: androidx.navigation.NavController) {
 
-    var sorteio by remember { mutableStateOf(1) }
+    var sorteio by remember { mutableStateOf(2) }
+    val img_dire = when (sorteio) {
+        1 -> R.drawable.deadpool___wolverine // Imagem do lado direito
+        2 -> R.drawable.hellboy // Altere conforme necessário
+        3 -> R.drawable.o_urso
+        else -> R.drawable.got // Defina uma imagem padrão
+    }
+
+    val img_esq = when (sorteio) {
+        1 -> R.drawable.hellboy // Imagem do lado esquerdo
+        2 -> R.drawable.o_urso // Altere conforme necessário
+        3 -> R.drawable.alien
+        else -> R.drawable.you // Defina uma imagem padrão
+    }
 
     val img_sorteada = when (sorteio) {
         1 -> R.drawable.credd
@@ -96,33 +112,54 @@ fun Sorteio(navController: androidx.navigation.NavController) {
         modifier = Modifier
             .fillMaxSize()
             .paint(
-                painter = painterResource( id = R.drawable.backgtound_escolha ),
+                painter = painterResource(id = R.drawable.backgtound_escolha),
                 contentScale = ContentScale.Crop
             )
     ) {
         Spacer(modifier = Modifier.padding(top = 60.dp))
 
-        Image(
-            painter = painterResource(id = img_sorteada),
-            contentDescription = "Filme",
+        Row(
             modifier = Modifier
-                .padding(top = 16.dp)
-                .width(400.dp)
-                .height(400.dp)
+                .clipToBounds()
                 .align(Alignment.CenterHorizontally)
-        )
+        ) {
+            Image(
+                painter = painterResource(id = img_esq),
+                contentDescription = "Filme",
+                modifier = Modifier
+                    .size(40.dp)
+                    .offset(y = 10.dp)
+                    .offset(x = 5.dp) // Move a imagem parcialmente para fora da tela
+            )
+            Image(
+                painter = painterResource(id = img_dire),
+                contentDescription = "Filme",
+                modifier = Modifier
+                    .size(100.dp)
+                    .offset(y = 15.dp)
+                    .offset(x = (-30).dp)// Move a imagem parcialmente para fora da tela
+            )
+            Image(
+                painter = painterResource(id = img_sorteada),
+                contentDescription = "Filme",
+                modifier = Modifier
+                    .size(450.dp)
+                    .offset(x = (-70).dp) // Move a imagem parcialmente para fora da tela
+            )
 
-        Spacer(modifier = Modifier.padding(top = 10.dp))
 
+        }
 
-        Text(text = nomeDoFilme,
+        Text(
+            text = nomeDoFilme,
             fontSize = 24.sp,
             fontWeight = FontWeight.SemiBold,
             modifier = Modifier
                 .padding(top = 5.dp)
                 .fillMaxWidth(),
             textAlign = TextAlign.Center,
-            color = Color(0xFFFF000000))
+            color = Color(0xFFFF000000)
+        )
 
         Button(
             onClick = { sorteio = (1..10).random() },
@@ -162,6 +199,7 @@ fun InicioScreen(navController: androidx.navigation.NavController) {
             .paint(
                 painter = painterResource(id = R.drawable.tela_de_inicio),
                 contentScale = ContentScale.Crop
+
             )
     ) {
         Text(
@@ -176,61 +214,86 @@ fun InicioScreen(navController: androidx.navigation.NavController) {
             fontFamily = MaterialTheme.typography.titleLarge.fontFamily
         )
 
-        Spacer(modifier = Modifier.padding(top = 390.dp))
+        Spacer(modifier = Modifier.padding(top = 350.dp))
 
-        Button(
-            onClick = { navController.navigate("home") },
+        Card(
             modifier = Modifier
-                .width(323.dp)
-                .height(45.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = corEscura,
-                contentColor = Color.White
-            ),
+                .width(355.dp)
+                .height(219.dp),
+            shape = RoundedCornerShape(30.dp)
         ) {
-            Text(
-                text = "Perguntas Aleatorias",
-                fontSize = 18.sp,
-                modifier = Modifier.padding(bottom = 2.dp)
-            )
-        }
-
-        Spacer(modifier = Modifier.padding(top = 8.dp))
-
-        Button(
-            onClick = { navController.navigate("home") },
-            modifier = Modifier
-                .width(323.dp)
-                .height(45.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = roxo,
-                contentColor = Color.White
-            ),
-
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxSize()
             ) {
-            Text(
-                text = "O que assistir",
-                fontSize = 18.sp, fontWeight = FontWeight.Medium
-            )
-        }
+                Text(
+                    text = "Precisa de ajuda para escolher ?",
+                    fontSize = 21.sp,
+                    color = Color.Black,
+                    fontWeight = FontWeight.Medium,
+                    textAlign = TextAlign.Center,
+                    fontFamily = MaterialTheme.typography.titleLarge.fontFamily
+                )
 
-        Spacer(modifier = Modifier.padding(top = 8.dp))
+                Spacer(modifier = Modifier.padding(top = 10.dp))
 
-        Button(
-            onClick = { navController.navigate("home") },
-            modifier = Modifier
-                .width(323.dp)
-                .height(45.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = corEscura,
-                contentColor = Color.White
-            ),
+                Button(
+                    onClick = { navController.navigate("home") },
+                    modifier = Modifier
+                        .width(323.dp)
+                        .height(45.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = corEscura,
+                        contentColor = Color.White
+                    ),
+                ) {
+                    Text(
+                        text = "Perguntas Aleatorias",
+                        fontSize = 18.sp,
+                        modifier = Modifier.padding(bottom = 2.dp)
+                    )
+                }
 
-            ) {
-            Text(
-                text = "Jantar em Familia ",
-                fontSize = 18.sp, fontWeight = FontWeight.Medium
-            )
+                Spacer(modifier = Modifier.padding(top = 8.dp))
+
+                Button(
+                    onClick = { navController.navigate("home") },
+                    modifier = Modifier
+                        .width(323.dp)
+                        .height(45.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = roxo,
+                        contentColor = Color.White
+                    ),
+
+                    ) {
+                    Text(
+                        text = "O que assistir",
+                        fontSize = 18.sp, fontWeight = FontWeight.Medium
+                    )
+                }
+
+                Spacer(modifier = Modifier.padding(top = 8.dp))
+
+                Button(
+                    onClick = { navController.navigate("home") },
+                    modifier = Modifier
+                        .width(323.dp)
+                        .height(45.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = corEscura,
+                        contentColor = Color.White
+                    ),
+
+                    ) {
+                    Text(
+                        text = "Jantar em Familia ",
+                        fontSize = 18.sp, fontWeight = FontWeight.Medium
+                    )
+                }
+            }
         }
 
     }
