@@ -44,6 +44,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -93,6 +94,7 @@ fun Sorteio(navController: androidx.navigation.NavController) {
         9 -> R.drawable.you
         else -> R.drawable.sem_dor__sem_ganho
     }
+
     val nomeDoFilme = when (sorteio) {
         1 -> "Filme: Credd "
         2 -> "Filme: Deadpool e Wolverine "
@@ -112,7 +114,7 @@ fun Sorteio(navController: androidx.navigation.NavController) {
         modifier = Modifier
             .fillMaxSize()
             .paint(
-                painter = painterResource(id = R.drawable.backgtound_escolha),
+                painter = painterResource(id = R.drawable.fundo_oque_assistir),
                 contentScale = ContentScale.Crop
             )
     ) {
@@ -187,7 +189,97 @@ fun Inicio() {
     NavHost(navController = navController, startDestination = "inicio") {
         composable("inicio") { InicioScreen(navController) }
         composable("home") { Sorteio(navController) }
+        composable("jantar") { Jantar(navController) }
     }
+}
+
+@Composable
+fun Jantar(navController: NavController) {
+
+    var sorteio by remember { mutableStateOf(6) }
+
+    var roleta = when (sorteio) {
+        1 -> R.drawable.roleta
+        2 -> R.drawable.roleta_90
+        3 -> R.drawable.roleta_90
+        4 -> R.drawable.roleta_180
+        5 -> R.drawable.roleta_180
+        6 -> R.drawable.roleta_270
+        7 -> R.drawable.roleta_270
+        else -> R.drawable.roleta
+    }
+
+    val nomeJanta = when (sorteio) {
+        1 -> "Noite da Sopa"
+        2 -> "Noite da Lasanha"
+        3 -> "Noite da Lasanha"
+        4 -> "Pedir Fast-Food"
+        5 -> "Pedir Fast-Food"
+        6 -> "Comida Mexicana"
+        7 -> "Comida Mexicana"
+        else -> "Noite da Sopa"
+    }
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxSize()
+            .paint(
+                painter = painterResource(id = R.drawable.fundo_jantar),
+                contentScale = ContentScale.Crop
+
+            )
+    ) {
+        Image(
+            painter = painterResource(id = roleta),
+            contentDescription = "Filme",
+            modifier = Modifier
+                .size(350.dp)
+                .offset(y = 50.dp)
+                .offset(x = 0.dp) // Move a imagem parcialmente para fora da tela
+        )
+
+        Image(
+            painter = painterResource(id = R.drawable.arrow_red),
+            contentDescription = "Filme",
+            modifier = Modifier
+                .size(30.dp)
+                .offset(y = 25.dp)
+                .offset(x = 0.dp) // Move a imagem parcialmente para fora da tela
+        )
+
+        Spacer(modifier = Modifier.padding(top = 60.dp))
+
+        Text(
+            text = nomeJanta,
+            fontSize = 32.sp,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = Color(0xFFFF000000)
+        )
+
+        Spacer(modifier = Modifier.padding(top = 190.dp))
+
+        Button(
+            onClick = { sorteio = (1..10).random() },
+            modifier = Modifier
+                .padding(20.dp)
+                .width(323.dp)
+                .height(45.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFFFF4139AD),
+                contentColor = Color.White
+            )
+        ) {
+            Text(
+                text = "Escolher",
+                fontSize = 24.sp
+            )
+        }
+    }
+
 }
 
 @Composable
@@ -278,7 +370,7 @@ fun InicioScreen(navController: androidx.navigation.NavController) {
                 Spacer(modifier = Modifier.padding(top = 8.dp))
 
                 Button(
-                    onClick = { navController.navigate("home") },
+                    onClick = { navController.navigate("jantar") },
                     modifier = Modifier
                         .width(323.dp)
                         .height(45.dp),
@@ -312,6 +404,15 @@ fun GreetingPreview() {
 private fun SorteioPreview() {
     EscolhaTheme {
         Sorteio(rememberNavController())
+    }
+
+}
+
+@Preview
+@Composable
+private fun JantarPreview() {
+    EscolhaTheme {
+        Jantar(rememberNavController())
     }
 
 }
