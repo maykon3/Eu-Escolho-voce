@@ -22,7 +22,7 @@
 <ul>
     <li><strong>Exibição Aleatória de Filmes:</strong> Ao clicar no botão "Escolher", um gênero e uma imagem são sorteados e exibidos na tela.</li>
      <li><strong>Escolha de perguntas aleatorias:</strong> Ao clicar no botão "Escolher", uma pergunta sobre determinado tema são sorteados e exibidos na tela.</li>
-    <li><strong>Exibiçao de uma roleta com comidas, para uma noite de jantar em familía:</strong> Ao clicar no botão "Escolher", a roleta gira para um determinado alimento, com a sinalização de uma seta vermelha, junto com a menssagem de qual vai ser o jantar daquela noite.</li>
+    <li><strong>Escolha do Jantar em Familía:</strong> Ao clicar no botão "Escolher", a roleta gira para um determinado alimento, com a sinalização de uma seta vermelha, junto com a menssagem de qual vai ser o jantar daquela noite.</li>
     <li><strong>Compatibilidade com Edge-to-Edge:</strong> Interface otimizada para telas completas em dispositivos modernos.</li>
 </ul>
 
