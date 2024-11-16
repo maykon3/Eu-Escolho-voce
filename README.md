@@ -1,12 +1,13 @@
-<h1>Escolha de Filme - Aplicativo Android</h1>
+<h1>Eu Escolho Você - Aplicativo Android</h1>
 
-<p>Este é um aplicativo simples para Android que ajuda o usuário a escolher um filme aleatório de diferentes gêneros, como Terror, Comédia, Ação, Romance e Suspense. O aplicativo exibe a imagem e o nome do gênero selecionado aleatoriamente, proporcionando uma experiência de escolha divertida e descomplicada.</p>
+<p>Este é um aplicativo simples para Android que ajuda o usuário a escolher um filme aleatório de diferentes gêneros, perguntas para quebrar o gelo naquele primeio encontro, festas de familia, ou caso o time do seu amigo perca aquele jogo importante, mas tambem te auxlia na escolha de qual será o jantar da noite . O aplicativo exibe imagens, frases e uma roleta com comidas aleatoriamente, proporcionando uma experiência de escolha divertida e descomplicada.</p>
 
 <h2>Tecnologias Utilizadas</h2>
 <ul>
     <li><strong>Linguagem:</strong> Kotlin</li>
     <li><strong>Framework de UI:</strong> Jetpack Compose</li>
     <li><strong>Biblioteca de Design:</strong> Material 3</li>
+    <li><strong>Prototipo: </strong> Figma </li>
 </ul>
 
 <h2>Estrutura do Projeto</h2>
@@ -20,7 +21,8 @@
 <h2>Funcionalidades</h2>
 <ul>
     <li><strong>Exibição Aleatória de Filmes:</strong> Ao clicar no botão "Escolher", um gênero e uma imagem são sorteados e exibidos na tela.</li>
-    <li><strong>Estilos Personalizados:</strong> Utilização do Material 3 para um design moderno, incluindo cores, fontes e componentes como <code>Card</code> e <code>Button</code>.</li>
+     <li><strong>Escolha de perguntas aleatorias:</strong> Ao clicar no botão "Escolher", uma pergunta sobre determinado tema são sorteados e exibidos na tela.</li>
+    <li><strong>Exibiçao de uma roleta com comidas, para uma noite de jantar em familía:</strong> Ao clicar no botão "Escolher", a roleta gira para um determinado alimento, com a sinalização de uma seta vermelha, junto com a menssagem de qual vai ser o jantar daquela noite.</li>
     <li><strong>Compatibilidade com Edge-to-Edge:</strong> Interface otimizada para telas completas em dispositivos modernos.</li>
 </ul>
 
@@ -33,7 +35,7 @@
 <h2>Como Executar</h2>
 <ol>
     <li>Clone este repositório:
-        <pre><code>git clone https://github.com/seu_usuario/escolha-de-filme.git</code></pre>
+        <pre><code>git clone https://github.com/seu_usuario/escolha</code></pre>
     </li>
     <li>Abra o projeto no Android Studio.</li>
     <li>Conecte um dispositivo ou inicie um emulador.</li>
