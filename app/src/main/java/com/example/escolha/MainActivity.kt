@@ -191,6 +191,9 @@ fun Inicio() {
         composable("home") { Sorteio(navController) }
         composable("jantar") { Jantar(navController) }
         composable("pergunta") { Perguntas((navController)) }
+        composable("familia") { Familia((navController)) }
+        composable("amigo") { Amigo((navController)) }
+        composable("primeiro") { Encontro((navController)) }
     }
 }
 
@@ -212,8 +215,8 @@ fun Jantar(navController: NavController) {
 
     val nomeJanta = when (sorteio) {
         1 -> "Noite da Sopa"
-        2 -> "Noite da Lasanha"
-        3 -> "Noite da Lasanha"
+        2 -> "Noite da Pizza"
+        3 -> "Noite da Pizza"
         4 -> "Pedir Fast-Food"
         5 -> "Pedir Fast-Food"
         6 -> "Comida Mexicana"
@@ -302,7 +305,7 @@ fun Perguntas(navController: NavController) {
         Spacer(modifier = Modifier.padding(10.dp))
 
         Button(
-            onClick = { navController.navigate("") },
+            onClick = { navController.navigate("primeiro") },
             modifier = Modifier
                 .width(323.dp)
                 .height(45.dp),
@@ -313,12 +316,12 @@ fun Perguntas(navController: NavController) {
             shape = RoundedCornerShape(12.dp)
         ) {
             Text(
-                text = "Primeiro Encontro",
+                text = "Time do Amigo Perdeu",
                 fontSize = 24.sp
             )
         }
         Button(
-            onClick = { navController.navigate("") },
+            onClick = { navController.navigate("familia") },
             modifier = Modifier
                 .padding(20.dp)
                 .width(323.dp)
@@ -335,7 +338,7 @@ fun Perguntas(navController: NavController) {
             )
         }
         Button(
-            onClick = { navController.navigate("") },
+            onClick = { navController.navigate("amigo") },
             modifier = Modifier
                 .width(323.dp)
                 .height(45.dp),
@@ -346,7 +349,7 @@ fun Perguntas(navController: NavController) {
             shape = RoundedCornerShape(12.dp)
         ) {
             Text(
-                text = "Time do Amigo perdeu",
+                text = "Primeiro Encontro",
                 fontSize = 24.sp
             )
         }
@@ -356,6 +359,51 @@ fun Perguntas(navController: NavController) {
 
 @Composable
 fun Encontro(navController: NavController) {
+
+    var sorteio by remember { mutableStateOf(1) }
+
+    val segundoTexto = when (sorteio % 10 + 1) {
+        1 -> "Ainda da tempo de Trocar"
+        2 -> "Quem fez o gol contra?"
+        3 -> "Foi a camiseta errada?"
+        4 -> "O time esqueceu de jogar?"
+        5 -> "A zaga estava de férias?"
+        6 -> "Quem pediu a troca?"
+        7 -> "Faltou concentração?"
+        8 -> "O goleiro estava no jogo?"
+        9 -> "Quem ficou com a culpa?"
+        10 -> "A torcida estava forte?"
+        else -> "Quem vai pagar o lanche?"
+    }
+
+    val terceiroTexto = when ((sorteio + 2) % 10 + 1) { // Garante que seja um número entre 1 e 10
+        1 -> "Ainda da tempo de Trocar"
+        2 -> "Quem fez o gol contra?"
+        3 -> "Foi a camiseta errada?"
+        4 -> "O time esqueceu de jogar?"
+        5 -> "A zaga estava de férias?"
+        6 -> "Quem pediu a troca?"
+        7 -> "Faltou concentração?"
+        8 -> "O goleiro estava no jogo?"
+        9 -> "Quem ficou com a culpa?"
+        10 -> "A torcida estava forte?"
+        else -> "Quem vai pagar o lanche?"
+    }
+
+    val primeiro = when (sorteio) {
+        1 -> "Ainda da tempo de Trocar"
+        2 -> "Quem fez o gol contra?"
+        3 -> "Foi a camiseta errada?"
+        4 -> "O time esqueceu de jogar?"
+        5 -> "A zaga estava de férias?"
+        6 -> "Quem pediu a troca?"
+        7 -> "Faltou concentração?"
+        8 -> "O goleiro estava no jogo?"
+        9 -> "Quem ficou com a culpa?"
+        10 -> "A torcida estava forte?"
+        else -> "Quem vai pagar o lanche?"
+    }
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -385,8 +433,45 @@ fun Encontro(navController: NavController) {
                 .offset(y = (-383).dp)
                 .padding(end = 130.dp)
         )
+
+        Text(
+            text = primeiro,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .offset(y = (-332).dp)
+                .padding(end = 30.dp)
+                .fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = Color(0xFF000000)
+        )
+
+        Text(
+            text = segundoTexto,
+            fontSize = 15.sp,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .offset(y = (-315).dp)
+                .padding(end = 30.dp)
+                .fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = Color(0xFF5B5B67)
+        )
+
+        Text(
+            text = terceiroTexto,
+            fontSize = 15.sp,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .offset(y = (-418).dp)
+                .padding(end = 30.dp)
+                .fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = Color(0xFF5B5B67)
+        )
+
         Button(
-            onClick = { var sorteio = (1..10).random() },
+            onClick = { sorteio = (1..11).random() },
             modifier = Modifier
                 .offset(y = (-130).dp)
                 .width(323.dp)
@@ -416,7 +501,7 @@ fun Familia(navController: NavController) {
         2 -> "Quem é o 'chef' da casa?"
         3 -> "Qual comida é proibida?"
         4 -> "Quem conta piada ruim?"
-        5 -> "Quem tem o pior gosto musical?"
+        5 -> "O pior gosto musical?"
         6 -> "Quem sempre perde?"
         7 -> "Quem é o mais preguiçoso?"
         8 -> "Quem é o mais bagunceiro?"
@@ -429,7 +514,7 @@ fun Familia(navController: NavController) {
         2 -> "Quem é o 'chef' da casa?"
         3 -> "Qual comida é proibida?"
         4 -> "Quem conta piada ruim?"
-        5 -> "Quem tem o pior gosto musical?"
+        5 -> "O pior gosto musical?"
         6 -> "Quem sempre perde?"
         7 -> "Quem é o mais preguiçoso?"
         8 -> "Quem é o mais bagunceiro?"
@@ -442,7 +527,7 @@ fun Familia(navController: NavController) {
         2 -> "Quem é o 'chef' da casa?"
         3 -> "Qual comida é proibida?"
         4 -> "Quem conta piada ruim?"
-        5 -> "Quem tem o pior gosto musical?"
+        5 -> "O pior gosto musical?"
         6 -> "Quem sempre perde?"
         7 -> "Quem é o mais preguiçoso?"
         8 -> "Quem é o mais bagunceiro?"
@@ -515,8 +600,9 @@ fun Familia(navController: NavController) {
             textAlign = TextAlign.Center,
             color = Color(0xFF5B5B67)
         )
+
         Button(
-            onClick = { var sorteio = (1..10).random() },
+            onClick = { sorteio = (1..10).random() },
             modifier = Modifier
                 .offset(y = (-120).dp)
                 .width(323.dp)
@@ -798,16 +884,16 @@ EscolhaTheme {
 Jantar(rememberNavController())
 }
 
-}
+}*/
 
 @Preview
 @Composable
 private fun PerguntasPreview() {
-EscolhaTheme {
-Perguntas(rememberNavController())
-}
+    EscolhaTheme {
+        Perguntas(rememberNavController())
+    }
 
-}*/
+}
 
 @Preview
 @Composable
