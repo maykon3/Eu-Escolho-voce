@@ -860,7 +860,7 @@ fun InicioScreen(navController: androidx.navigation.NavController) {
     }
 }
 
-/**@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
 EscolhaTheme {
@@ -884,7 +884,7 @@ EscolhaTheme {
 Jantar(rememberNavController())
 }
 
-}*/
+}
 
 @Preview
 @Composable
