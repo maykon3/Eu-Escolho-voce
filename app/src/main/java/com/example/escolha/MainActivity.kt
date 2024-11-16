@@ -190,6 +190,7 @@ fun Inicio() {
         composable("inicio") { InicioScreen(navController) }
         composable("home") { Sorteio(navController) }
         composable("jantar") { Jantar(navController) }
+        composable("pergunta") { Perguntas((navController)) }
     }
 }
 
@@ -283,6 +284,388 @@ fun Jantar(navController: NavController) {
 }
 
 @Composable
+fun Perguntas(navController: NavController) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFFFF4E4E54))
+    ) {
+        Text(
+            text = "Para qual ocasião são \n  \n   essas perguntas?",
+            fontSize = 32.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = Color(0xFFFFC9CAEF),
+        )
+
+        Spacer(modifier = Modifier.padding(10.dp))
+
+        Button(
+            onClick = { navController.navigate("") },
+            modifier = Modifier
+                .width(323.dp)
+                .height(45.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFFFF4139AD),
+                contentColor = Color.White
+            ),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Text(
+                text = "Primeiro Encontro",
+                fontSize = 24.sp
+            )
+        }
+        Button(
+            onClick = { navController.navigate("") },
+            modifier = Modifier
+                .padding(20.dp)
+                .width(323.dp)
+                .height(45.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFFFF4139AD),
+                contentColor = Color.White
+            ),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Text(
+                text = "Encontros Familiares",
+                fontSize = 24.sp
+            )
+        }
+        Button(
+            onClick = { navController.navigate("") },
+            modifier = Modifier
+                .width(323.dp)
+                .height(45.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFFFF4139AD),
+                contentColor = Color.White
+            ),
+            shape = RoundedCornerShape(12.dp)
+        ) {
+            Text(
+                text = "Time do Amigo perdeu",
+                fontSize = 24.sp
+            )
+        }
+
+    }
+}
+
+@Composable
+fun Encontro(navController: NavController) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFFFFC9CAEF))
+    ) {
+        Text(
+            "Time do Amigo \n\n      Perdeu", fontSize = 32.sp, fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .offset(y = 380.dp)
+
+        )
+
+        Image(
+            painter = painterResource(id = R.drawable.roleta777),
+            contentDescription = "Filme",
+            modifier = Modifier
+                .size(500.dp)
+                .align(Alignment.CenterHorizontally)
+                .offset(y = (-50).dp)
+        )
+
+        Text(
+            "Perguntas", fontSize = 32.sp, fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .offset(y = (-383).dp)
+                .padding(end = 130.dp)
+        )
+        Button(
+            onClick = { var sorteio = (1..10).random() },
+            modifier = Modifier
+                .offset(y = (-130).dp)
+                .width(323.dp)
+                .height(45.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFFFF4139AD),
+                contentColor = Color.White
+            )
+
+        ) {
+            Text(
+                text = "Escolher",
+                fontSize = 24.sp
+            )
+        }
+
+    }
+}
+
+@Composable
+fun Familia(navController: NavController) {
+
+    var sorteio by remember { mutableStateOf(1) }
+
+    val segundoTexto = when (sorteio % 10 + 1) {
+        1 -> "Quem é mais atrapalhado?"
+        2 -> "Quem é o 'chef' da casa?"
+        3 -> "Qual comida é proibida?"
+        4 -> "Quem conta piada ruim?"
+        5 -> "Quem tem o pior gosto musical?"
+        6 -> "Quem sempre perde?"
+        7 -> "Quem é o mais preguiçoso?"
+        8 -> "Quem é o mais bagunceiro?"
+        9 -> "Quem tem mais histórias?"
+        else -> "Quem ronca mais?"
+    }
+
+    val terceiroTexto = when ((sorteio + 2) % 10 + 1) { // Garante que seja um número entre 1 e 10
+        1 -> "Quem é mais atrapalhado?"
+        2 -> "Quem é o 'chef' da casa?"
+        3 -> "Qual comida é proibida?"
+        4 -> "Quem conta piada ruim?"
+        5 -> "Quem tem o pior gosto musical?"
+        6 -> "Quem sempre perde?"
+        7 -> "Quem é o mais preguiçoso?"
+        8 -> "Quem é o mais bagunceiro?"
+        9 -> "Quem tem mais histórias?"
+        else -> "Quem ronca mais?"
+    }
+
+    val primeiro = when (sorteio) {
+        1 -> "Quem é mais atrapalhado?"
+        2 -> "Quem é o 'chef' da casa?"
+        3 -> "Qual comida é proibida?"
+        4 -> "Quem conta piada ruim?"
+        5 -> "Quem tem o pior gosto musical?"
+        6 -> "Quem sempre perde?"
+        7 -> "Quem é o mais preguiçoso?"
+        8 -> "Quem é o mais bagunceiro?"
+        9 -> "Quem tem mais histórias?"
+        else -> "Quem ronca mais?"
+    }
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFFFFC9CAEF))
+    ) {
+        Text(
+            "Encontros Familiares", fontSize = 32.sp, fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .offset(y = 340.dp)
+
+        )
+
+        Image(
+            painter = painterResource(id = R.drawable.roleta777),
+            contentDescription = "Filme",
+            modifier = Modifier
+                .size(500.dp)
+                .align(Alignment.CenterHorizontally)
+                .offset(y = (-50).dp)
+        )
+
+        Text(
+            "Perguntas", fontSize = 32.sp, fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .offset(y = (-383).dp)
+                .padding(end = 130.dp)
+        )
+
+        Text(
+            text = primeiro,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .offset(y = (-332).dp)
+                .padding(end = 30.dp)
+                .fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = Color(0xFF000000)
+        )
+
+        Text(
+            text = segundoTexto,
+            fontSize = 15.sp,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .offset(y = (-315).dp)
+                .padding(end = 30.dp)
+                .fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = Color(0xFF5B5B67)
+        )
+
+        Text(
+            text = terceiroTexto,
+            fontSize = 15.sp,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .offset(y = (-418).dp)
+                .padding(end = 30.dp)
+                .fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = Color(0xFF5B5B67)
+        )
+        Button(
+            onClick = { var sorteio = (1..10).random() },
+            modifier = Modifier
+                .offset(y = (-120).dp)
+                .width(323.dp)
+                .height(45.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFFFF4139AD),
+                contentColor = Color.White
+            )
+
+        ) {
+            Text(
+                text = "Escolher",
+                fontSize = 24.sp
+            )
+        }
+
+    }
+}
+
+@Composable
+fun Amigo(navController: NavController) {
+    // Lembrar o estado do sorteio e inicializar com um valor padrão
+    var sorteio by remember { mutableStateOf(1) }
+
+    // Calcular os valores de segundo e terceiro com base no sorteio
+    val segundoTexto = when (sorteio % 10 + 1) { // Garante que seja um número entre 1 e 10
+        1 -> "Qual é o seu sonho?"
+        2 -> "Qual música você ama?"
+        3 -> "Prefere praia ou montanha?"
+        4 -> "Tem um filme favorito?"
+        5 -> "O que te faz sorrir?"
+        6 -> "Já tentou algum hobby novo?"
+        7 -> "Qual viagem mais marcou?"
+        8 -> "Gosta mais de café ou chá?"
+        9 -> "Tem algum talento escondido?"
+        else -> "Qual é a sua comida favorita?"
+    }
+
+    val terceiroTexto = when ((sorteio + 2) % 10 + 1) { // Garante que seja um número entre 1 e 10
+        1 -> "Qual é o seu sonho?"
+        2 -> "Qual música você ama?"
+        3 -> "Prefere praia ou montanha?"
+        4 -> "Tem um filme favorito?"
+        5 -> "O que te faz sorrir?"
+        6 -> "Já tentou algum hobby novo?"
+        7 -> "Qual viagem mais marcou?"
+        8 -> "Gosta mais de café ou chá?"
+        9 -> "Tem algum talento escondido?"
+        else -> "Qual é a sua comida favorita?"
+    }
+
+    val primeiroTexto = when (sorteio) {
+        1 -> "Qual é o seu sonho?"
+        2 -> "Qual música você ama?"
+        3 -> "Prefere praia ou montanha?"
+        4 -> "Tem um filme favorito?"
+        5 -> "O que te faz sorrir?"
+        6 -> "Já tentou algum hobby novo?"
+        7 -> "Qual viagem mais marcou?"
+        8 -> "Gosta mais de café ou chá?"
+        9 -> "Tem algum talento escondido?"
+        else -> "Qual é a sua comida favorita?"
+    }
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFFC9CAEF)) // Suaviza a cor para um tom mais claro
+    ) {
+        Text(
+            "Primeiro Encontro", fontSize = 32.sp, fontWeight = FontWeight.SemiBold,
+            modifier = Modifier.offset(y = 340.dp)
+        )
+
+        Image(
+            painter = painterResource(id = R.drawable.roleta777),
+            contentDescription = "Filme",
+            modifier = Modifier
+                .size(500.dp)
+                .align(Alignment.CenterHorizontally)
+                .offset(y = (-50).dp)
+        )
+
+        Text(
+            "Perguntas", fontSize = 32.sp, fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .offset(y = (-383).dp)
+                .padding(end = 130.dp)
+        )
+
+        Text(
+            text = primeiroTexto,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .offset(y = (-332).dp)
+                .padding(end = 30.dp)
+                .fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = Color(0xFF000000)
+        )
+
+        Text(
+            text = segundoTexto,
+            fontSize = 15.sp,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .offset(y = (-315).dp)
+                .padding(end = 30.dp)
+                .fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = Color(0xFF5B5B67)
+        )
+
+        Text(
+            text = terceiroTexto,
+            fontSize = 15.sp,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .offset(y = (-418).dp)
+                .padding(end = 30.dp)
+                .fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = Color(0xFF5B5B67)
+        )
+
+        Button(
+            onClick = { sorteio = (1..10).random() }, // Atualiza o sorteio ao clicar
+            modifier = Modifier
+                .offset(y = (-190).dp)
+                .width(323.dp)
+                .height(45.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF4139AD),
+                contentColor = Color.White
+            )
+        ) {
+            Text(
+                text = "Escolher",
+                fontSize = 24.sp
+            )
+        }
+    }
+}
+
+
+@Composable
 fun InicioScreen(navController: androidx.navigation.NavController) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -332,7 +715,7 @@ fun InicioScreen(navController: androidx.navigation.NavController) {
                 Spacer(modifier = Modifier.padding(top = 10.dp))
 
                 Button(
-                    onClick = { navController.navigate("home") },
+                    onClick = { navController.navigate("pergunta") },
                     modifier = Modifier
                         .width(323.dp)
                         .height(45.dp),
@@ -391,28 +774,64 @@ fun InicioScreen(navController: androidx.navigation.NavController) {
     }
 }
 
-@Preview(showBackground = true)
+/**@Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    EscolhaTheme {
-        InicioScreen(rememberNavController())
-    }
+EscolhaTheme {
+InicioScreen(rememberNavController())
+}
 }
 
 @Preview
 @Composable
 private fun SorteioPreview() {
-    EscolhaTheme {
-        Sorteio(rememberNavController())
-    }
+EscolhaTheme {
+Sorteio(rememberNavController())
+}
 
 }
 
 @Preview
 @Composable
 private fun JantarPreview() {
+EscolhaTheme {
+Jantar(rememberNavController())
+}
+
+}
+
+@Preview
+@Composable
+private fun PerguntasPreview() {
+EscolhaTheme {
+Perguntas(rememberNavController())
+}
+
+}*/
+
+@Preview
+@Composable
+private fun EncontroPreview() {
     EscolhaTheme {
-        Jantar(rememberNavController())
+        Amigo(rememberNavController())
+    }
+
+}
+
+@Preview
+@Composable
+private fun EncontrosPreview() {
+    EscolhaTheme {
+        Familia(rememberNavController())
+    }
+
+}
+
+@Preview
+@Composable
+private fun EncontrossPreview() {
+    EscolhaTheme {
+        Encontro(rememberNavController())
     }
 
 }
