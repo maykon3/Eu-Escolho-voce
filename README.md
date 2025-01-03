@@ -76,10 +76,11 @@
     <li>Execute o aplicativo pressionando <strong>Run</strong>.</li>
   </ol>
 
-  <h2>🚀 Mockup do Projeto</h2>
-  <div style="display: flex; gap: 0px;">
-    <img src="MockupEscolha.svg" alt="Mockup do projeto" width="500" height="300">
-  </div>
+ <h2>🚀 Mockup do Projeto</h2>
+<div style="display: flex; gap: 0px;">
+  <img src="Mockup Escolha.png" alt="Mockup do projeto" width="500" height="300" style="border-radius: 30px;">
+</div>
+
 
   <h2>📄 Licença</h2>
   <p>Este projeto está licenciado sob a licença MIT. Consulte o arquivo <code>LICENSE</code> para mais detalhes.</p>
