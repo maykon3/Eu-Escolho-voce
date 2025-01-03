@@ -1,5 +1,4 @@
 <body>
-  <img src="Group 404.svg" alt="Mockup do projeto" width="400" height="150">
   
   <h1>Eu Escolho Você 🎲</h1>
   
